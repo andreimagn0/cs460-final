@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Andrei Dominic Magno
+Student ID: 129948062
 
 INSTRUCTIONS
 ------------
@@ -31,6 +31,14 @@ def explain_problem():
     str
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
+    - **Why a single shortest-path run from S is not enough:**
+    A single shortest-path run from S would only consider the cheapest cost from the start to each chamber, but it does not consider the best order of which chambers to visit.
+
+    - **What decision remains after all inter-location costs are known:**
+    The decision that remains after all inter-location costs are known is to figure out the sequence of visting relic chambers that minimize total travel cost.
+
+    - **Why this requires a search over orders (one sentence):**
+    This requires a search over orders because the total travel cost depends on the visiting order of chambers, not just on shortest path between chambers.
 
     TODO
     """
