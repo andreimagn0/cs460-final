@@ -144,6 +144,19 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
+    Once a node has been finalized in S, dist[v] is guaranteed to be the shortest-path distance from x to v and will not change.
+
+    For nodes not in S, dist[u] is the current best-so-far shortest path from x to u using finalized nodes, and may still be updated if a better path is discovered.
+
+    Before iteration 1, S is empty, so the condition for finalized nodes holds. Since the source x has dist[x] = 0 as the shortest path is itself, and all other nodes have distance infinity since no other paths have been discovered, the invariant holds. 
+
+    At each iteration, you pick the node with the smallest current distance. Any alternative path must either go through a node with an equal to or larger than distance, and adding nonnegative edge weights cannot result in a lower total cost. Therefore, no shortest path exists, and finalizing the min-dist node can be done safely.
+
+    At termination, S contains all reachable nodes from x, and for each node v in S, dist[v] represents the guaranteed shortest-path distance from x to v. Nodes that are not in S are unreachable from x and have distance infinity.  
+
+    Correct shortest-path distances guarantee optimal routing decisions, ensuring the planner chooses the minimium-cost path every time.
+
+
     TODO
     """
     return "TODO"

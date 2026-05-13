@@ -71,29 +71,28 @@ This requires a search over orders because the total travel cost depends on the 
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+Once a node has been finalized in S, dist[v] is guaranteed to be the shortest-path distance from x to v and will not change.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+For nodes not in S, dist[u] is the current best-so-far shortest path from x to u using finalized nodes, and may still be updated if a better path is discovered.
 
 ### Part 3b: Why Each Phase Holds
 
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+Before iteration 1, S is empty, so the condition for finalized nodes holds. Since the source x has dist[x] = 0 as the shortest path is itself, and all other nodes have distance infinity since no other paths have been discovered, the invariant holds. 
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+At each iteration, you pick the node with the smallest current distance. Any alternative path must either go through a node with an equal to or larger than distance, and adding nonnegative edge weights cannot result in a lower total cost. Therefore, no shortest path exists, and finalizing the min-dist node can be done safely.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+At termination, S contains all reachable nodes from x, and for each node v in S, dist[v] represents the guaranteed shortest-path distance from x to v. Nodes that are not in S are unreachable from x and have distance infinity.  
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+Correct shortest-path distances guarantee optimal routing decisions, ensuring the planner chooses the minimium-cost path every time.
 
 ---
 
