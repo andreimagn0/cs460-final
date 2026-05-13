@@ -34,8 +34,8 @@ This requires a search over orders because the total travel cost depends on the 
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Spawn (S) | Needed to compute the shortest cost from S to each possible relic |
+| Relics | Needed to compute the shortest cost from each relic to the next possible relic or the exit node |
 
 ### Part 2b: Distance Storage
 
@@ -43,20 +43,20 @@ This requires a search over orders because the total travel cost depends on the 
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | 2-D Dictionary |
+| What the keys represent | Outer Key = source node, Inner Key = destination node |
+| What the values represent | Cheapest travel cost from source to destination |
+| Lookup time complexity | Dictionary lookup time |
+| Why O(1) lookup is possible | Dictionaries in Python use hashing |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** 1 spawn + k relics = O(k)
+- **Cost per run:** Single shortest-path run costs O(m log n)
+- **Total complexity:** Number of Dijkstra runs + Cost per run = O(k) * O(m log n) = O(k * m log n)
+- **Justification (one line):** We run Dijkstra for each source node, and each run costs O(m log n).
 
 ---
 
