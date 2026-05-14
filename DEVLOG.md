@@ -19,12 +19,12 @@ For this assignment, I want to try to finish 2-3 parts every day starting from t
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/14/26]: [Confusion About Part 4]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+During part 4, I was really stuck on what the problem was asking for, and I did not understand what the failure mode meant for awhile. Then, after sitting on the problem for a bit, I realized it was just a case in which greedy path fails to stay on par or beat the optimal path. After that realization, everything came together naturally, and I was able to come up with the rest of the problem easily. The part that truly deepened my understanding was figuring out the failure mode from scratch, and coming up with a case using the graph that showed how greedy path fails to keep up with the optimal path.
 
 ---
 
@@ -52,7 +52,7 @@ _Your entry here._
 | Part 1: Problem Analysis | 1 Hour |
 | Part 2: Precomputation Design | 3 Hours |
 | Part 3: Algorithm Correctness | 1.5 Hours |
-| Part 4: Search Design | |
+| Part 4: Search Design | 2 Hours |
 | Part 5: State and Search Space | |
 | Part 6: Pruning | |
 | Part 7: Implementation | |

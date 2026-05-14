@@ -174,6 +174,32 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
+    ### Why Greedy Fails
+
+    > State the failure mode. Then give a concrete counter-example using specific node names
+    > or costs (you may use the illustration example from the spec). Three to five bullets.
+
+    - **The failure mode:** Greedy only considers cheapest local cost, not best order of chambers to visit.
+    - **Counter-example setup:**
+
+    **Entrance:** S | **Relic chambers:** B, C, D | **Exit:** T
+
+    | From \ To | B   | C   | D   | T   |
+    |-----------|-----|-----|-----|-----|
+    | S         | 1   | 2   | 2   | --  |
+    | B         | --  | 4   | 5   | 1   |
+    | C         | 2   | --  | 1   | 1   |
+    | D         | 1   | 2   | --  | 1   |
+
+    - **What greedy picks:** S -> B -> C -> D -> T; total fuel = 1 + 4 + 1 + 1 = **7**
+    - **What optimal picks:** S -> C -> D -> B -> T; total fuel = 2 + 1 + 1 + 1 = **5**
+    - **Why greedy loses:** Greedy loses because it only considers cheapest next chamber at each step, but the local choice can lead to a suboptimal global path.
+
+    ### What the Algorithm Must Explore
+    > One bullet. Must use the word "order."
+
+    The algorithm must explore different orders of chambers to visit to find minimum total cost.
+
     TODO
     """
     return "TODO"
