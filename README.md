@@ -133,18 +133,18 @@ The algorithm must explore different orders of chambers to visit to find minimum
 > Document the three components of your search state as a table.
 > Variable names here must match exactly what you use in torchbearer.py.
 
-| Component | Variable name in code | Data type | Description |
-|---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Component                | Variable name in code | Data type | Description                                     |
+|---                       |---                    |---        |---                                              |
+| Current location         | current_loc           | Node      | Stores the current node                         |
+| Relics already collected | relics_remaining      | Set[Node] | Stores set of relics that have not been visited |
+| Fuel cost so far         | cost_so_far           | Float     | Stores the fuel cost so far at the current node |
 
 ### Part 5b: Data Structure for Visited Relics
 
 > Fill in the table.
 
 | Property | Your answer |
-|---|---|
+|---       |---          |
 | Data structure chosen | |
 | Operation: check if relic already collected | Time complexity: |
 | Operation: mark a relic as collected | Time complexity: |

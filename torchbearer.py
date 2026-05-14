@@ -229,6 +229,16 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     TODO
     """
+    best = [float("inf"), []]
+
+    relics_remaining = set(relics)
+    relics_visited_order = []
+
+    _explore(dist_table, spawn, relics_remaining, relics_visited_order, 0, exit_node, best)
+
+    return (best[0], best[1])
+
+    
     pass
 
 
@@ -261,7 +271,35 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    if not relics_remaining:
+        if dist_table[current_loc][exit_node] == float("inf"):
+            return
+        final_cost = cost_so_far + dist_table[current_loc][exit_node]
+
+        if final_cost < best[0]:
+            best[0] = final_cost
+            best[1] = list(relics_visited_order)
+        return
+
+    if cost_so_far >= best[0]: # This pruning condition is safe because it future steps from cost_so_far 
+        return                 # can only increase costs since edge weights are nonnegative. This is also
+                               # why >= is valid instead of >, since the route cost can only increase from that point.
+        
+    
+    
+    for relic in list(relics_remaining):
+        if dist_table[current_loc][relic] == float("inf"):
+            continue
+        step_cost = cost_so_far + dist_table[current_loc][relic]
+
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+
+        _explore(dist_table, relic, relics_remaining, relics_visited_order, step_cost, exit_node, best)
+
+        relics_visited_order.pop()
+        relics_remaining.add(relic)
+
 
 
 # =============================================================================
@@ -284,7 +322,14 @@ def solve(graph, spawn, relics, exit_node):
         Returns (float('inf'), []) if no valid route exists.
 
     TODO
+    we are trying to calculate total cost for each algorithm
+    compare each total cost with remaining total cost
+    we calculate total cost by using a recursive function to check each layer of the graph and their distances
+    return the minimum cost and ordered relic list
+    we store these when we unwrap the recursive stack 
+    base case: when the current node is the exit node, return 0
     """
+
     pass
 
 
