@@ -31,7 +31,10 @@ def explain_problem():
     str
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
-    - **Why a single shortest-path run from S is not enough:**
+    TODO
+    """
+    return '''
+ - **Why a single shortest-path run from S is not enough:**
     A single shortest-path run from S would only consider the cheapest cost from the start to each chamber, but it does not consider the best order of which chambers to visit.
 
     - **What decision remains after all inter-location costs are known:**
@@ -40,9 +43,7 @@ def explain_problem():
     - **Why this requires a search over orders (one sentence):**
     This requires a search over orders because the total travel cost depends on the visiting order of chambers, not just on shortest path between chambers.
 
-    TODO
-    """
-    return "TODO"
+'''
 
 
 # =============================================================================
@@ -143,7 +144,9 @@ def dijkstra_invariant_check():
     str
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
-
+    TODO
+    """
+    return '''
     Once a node has been finalized in S, dist[v] is guaranteed to be the shortest-path distance from x to v and will not change.
 
     For nodes not in S, dist[u] is the current best-so-far shortest path from x to u using finalized nodes, and may still be updated if a better path is discovered.
@@ -155,11 +158,7 @@ def dijkstra_invariant_check():
     At termination, S contains all reachable nodes from x, and for each node v in S, dist[v] represents the guaranteed shortest-path distance from x to v. Nodes that are not in S are unreachable from x and have distance infinity.  
 
     Correct shortest-path distances guarantee optimal routing decisions, ensuring the planner chooses the minimium-cost path every time.
-
-
-    TODO
-    """
-    return "TODO"
+'''
 
 
 # =============================================================================
@@ -173,6 +172,9 @@ def explain_search():
     str
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
+    TODO
+    """
+    return '''
 
     ### Why Greedy Fails
 
@@ -199,10 +201,7 @@ def explain_search():
     > One bullet. Must use the word "order."
 
     The algorithm must explore different orders of chambers to visit to find minimum total cost.
-
-    TODO
-    """
-    return "TODO"
+'''
 
 
 # =============================================================================
@@ -329,8 +328,8 @@ def solve(graph, spawn, relics, exit_node):
     we store these when we unwrap the recursive stack 
     base case: when the current node is the exit node, return 0
     """
-
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
 
 
 # =============================================================================

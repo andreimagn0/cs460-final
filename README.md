@@ -3,18 +3,9 @@
 **Student Name:** Andrei Dominic Magno
 **Student ID:** 129948062
 **Course:** CS 460 – Algorithms | Spring 2026
-
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
   A single shortest-path run from S would only consider the cheapest cost from the start to each chamber, but it does not consider the best order of which chambers to visit.
@@ -30,16 +21,12 @@ This requires a search over orders because the total travel cost depends on the 
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | Spawn (S) | Needed to compute the shortest cost from S to each possible relic |
 | Relics | Needed to compute the shortest cost from each relic to the next possible relic or the exit node |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -51,8 +38,6 @@ This requires a search over orders because the total travel cost depends on the 
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** 1 spawn + k relics = O(k)
 - **Cost per run:** Single shortest-path run costs O(m log n)
 - **Total complexity:** Number of Dijkstra runs + Cost per run = O(k) * O(m log n) = O(k * m log n)
@@ -62,13 +47,7 @@ This requires a search over orders because the total travel cost depends on the 
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
-
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
 Once a node has been finalized in S, dist[v] is guaranteed to be the shortest-path distance from x to v and will not change.
@@ -77,8 +56,6 @@ Once a node has been finalized in S, dist[v] is guaranteed to be the shortest-pa
 For nodes not in S, dist[u] is the current best-so-far shortest path from x to u using finalized nodes, and may still be updated if a better path is discovered.
 
 ### Part 3b: Why Each Phase Holds
-
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
 Before iteration 1, S is empty, so the condition for finalized nodes holds. Since the source x has dist[x] = 0 as the shortest path is itself, and all other nodes have distance infinity since no other paths have been discovered, the invariant holds. 
@@ -91,7 +68,6 @@ At termination, S contains all reachable nodes from x, and for each node v in S,
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
 Correct shortest-path distances guarantee optimal routing decisions, ensuring the planner chooses the minimium-cost path every time.
 
 ---
@@ -99,9 +75,6 @@ Correct shortest-path distances guarantee optimal routing decisions, ensuring th
 ## Part 4: Search Design
 
 ### Why Greedy Fails
-
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
 
 - **The failure mode:** Greedy only considers cheapest local cost, not best order of chambers to visit.
 - **Counter-example setup:**
@@ -120,7 +93,6 @@ Correct shortest-path distances guarantee optimal routing decisions, ensuring th
 - **Why greedy loses:** Greedy loses because it only considers cheapest next chamber at each step, but the local choice can lead to a suboptimal global path.
 
 ### What the Algorithm Must Explore
-> One bullet. Must use the word "order."
 
 The algorithm must explore different orders of chambers to visit to find minimum total cost.
 
@@ -130,8 +102,6 @@ The algorithm must explore different orders of chambers to visit to find minimum
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
 
 | Component                | Variable name in code | Data type | Description                                     |
 |---                       |---                    |---        |---                                              |
@@ -141,22 +111,18 @@ The algorithm must explore different orders of chambers to visit to find minimum
 
 ### Part 5b: Data Structure for Visited Relics
 
-> Fill in the table.
-
-| Property | Your answer |
-|---       |---          |
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Property                                    | Your answer       |
+|---                                          |---                |
+| Data structure chosen                       | set[Node]        |
+| Operation: check if relic already collected | Time complexity: O(1)  |
+| Operation: mark a relic as collected        | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack)       | Time complexity: O(1) |
+| Why this structure fits                     | Sets are mutable and have fast add/remove |
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** k!  relic orders considered
+- **Why:** Search may need to explore all possible paths to find the mininum cost.
 
 ---
 
@@ -164,30 +130,27 @@ The algorithm must explore different orders of chambers to visit to find minimum
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** the current minimum cost so far for the route
+- **When it is used:** if cost_so_far is greater than or equal to the current best cost
+- **What it allows the algorithm to skip:** Skips unnecessary recursive calls since the current travel cost is higher than the current cost
 
 ### Part 6b: Lower Bound Estimation
 
-> Three bullets.
-
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** current location, current total cost, relics remaining
+- **What the lower bound accounts for:** the minimum additional cost required for the current route
+- **Why it never overestimates:** The current route cannot beat the best route and it cannot avoid adding additional cost
+The current route will either be on par or more than the best
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
+Future steps from cost_so_far can only increase costs since edge weights are nonnegative
+Pruning checks the lower bound, since the route cost can only increase from that point
+        
 
 ---
 
 ## References
 
-> Bullet list. If none beyond lecture notes, write that.
-
-- _Your references here._
+- https://www.geeksforgeeks.org/dsa/introduction-to-branch-and-bound-data-structures-and-algorithms-tutorial/
+- https://www.youtube.com/watch?v=m1Fjdnj_Mds 
+- Lecture Notes
